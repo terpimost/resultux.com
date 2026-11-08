@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Resultux Wave — WebGL1 / Canvas2D</title>
+    <style>
+      :root {
+        font-family: Inter, system-ui, sans-serif;
+        color: #e9e4e9;
+        background: #17131a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      header {
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0;
+      }
+      .buttons {
+        display: flex;
+        gap: 8px;
+      }
+      button,
+      select {
+        border: 1px solid #605766;
+        background: #29212e;
+        color: inherit;
+        border-radius: 8px;
+        padding: 9px 12px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #413447;
+      }
+      #host {
+        position: relative;
+        height: 55vh;
+        min-height: 350px;
+        background: #1b1219;
+        overflow: hidden;
+      }
+      #stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        touch-action: none;
+        cursor: crosshair;
+      }
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      #canvas2d {
+        display: none;
+      }
+      #stats {
+        position: absolute;
+        right: 14px;
+        top: 14px;
+        background: #1b1219df;
+        border: 1px solid #ffffff40;
+        border-radius: 8px;
+        padding: 12px;
+        color: white;
+        font: 12px/1.65 monospace;
+        white-space: pre;
+        text-align: right;
+        pointer-events: none;
+      }
+      #hint {
+        position: absolute;
+        left: 16px;
+        bottom: 16px;
+        color: #f9e7f3;
+        font-size: 12px;
+        pointer-events: none;
+      }
+      #exit {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        display: none;
+        z-index: 5;
+      }
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .controls {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px 30px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+      }
+      label span {
+        float: right;
+        color: #eac0e4;
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: #edc0e4;
+        margin-top: 12px;
+      }
+      footer {
+        color: #a99baa;
+        font-size: 12px;
+        margin-top: 20px;
+      }
+      #host.full {
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100dvh;
+        z-index: 1000;
+      }
+      #host.full #exit {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Resultux — GPU wave prototype</h1>
+      <div class="buttons">
+        <select id="renderer">
+          <option value="auto">Auto (WebGL1 preferred)</option>
+          <option value="webgl">WebGL 1</option>
+          <option value="canvas">Canvas 2D</option></select
+        ><button id="reset">Reset waves</button><button id="pause">Pause</button
+        ><button id="fullscreen">Expand fullscreen</button>
+      </div>
+    </header>
+    <div id="host">
+      <div id="stage">
+        <canvas id="canvasgl"></canvas><canvas id="canvas2d"></canvas>
+        <div id="stats">Initializing…</div>
+        <div id="hint">Move quickly · Click or tap · Drag</div>
+        <button id="exit">Exit fullscreen</button>
+      </div>
+    </div>
+    <main>
+      <div class="controls" id="controls"></div>
+      <footer>
+        WebGL 1 primary · Canvas 2D fallback · DPR capped at 2× · 60 FPS maximum
+        · No idle waves · 0.25 CSS px cutoff. All distances and amplitudes use
+        CSS pixels.
+      </footer>
+    </main>
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

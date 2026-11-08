@@ -1,0 +1,308 @@
+{
+  "version": 2,
+  "includeCPUWebGL": true,
+  "graphics": {
+    "available": true,
+    "vendor": "Google Inc. (Google)",
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+    "version": "WebGL 1.0 (OpenGL ES 2.0 Chromium)"
+  },
+  "parameters": {
+    "frequency": 0.3,
+    "speed": 120,
+    "growth": 0.8
+  },
+  "preset": "desktop",
+  "size": {
+    "width": 1440,
+    "height": 594,
+    "dpr": 1
+  },
+  "seed": 20261107,
+  "warmup": 120,
+  "frames": 600,
+  "trials": 3,
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.7390.37 Safari/537.36",
+  "devicePixelRatio": 1,
+  "hardwareConcurrency": 12,
+  "timestamp": "2026-11-08T00:45:32.239Z",
+  "results": [
+    {
+      "trial": 0,
+      "renderer": "webgl-cpu",
+      "status": "ok",
+      "waveEvaluation": "cpu",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.09833332697550455,
+        "p50": 0.10000038146972656,
+        "p95": 0.19999980926513672
+      },
+      "simulationMs": {
+        "mean": 0.057833317120869955,
+        "p50": 0,
+        "p95": 0.19999980926513672
+      },
+      "renderSubmitMs": {
+        "mean": 0.0405000098546346,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.666,
+        "p50": 16.699999999999818,
+        "p95": 16.799999999999272
+      },
+      "fps": 60.00240009600384,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 0,
+      "renderer": "webgl",
+      "status": "ok",
+      "waveEvaluation": "vertex-shader",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.03683332125345866,
+        "p50": 0,
+        "p95": 0.19999980926513672
+      },
+      "simulationMs": {
+        "mean": 0.014833323160807292,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "renderSubmitMs": {
+        "mean": 0.021999998092651366,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.665999999999997,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728
+      },
+      "fps": 60.00240009600385,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 0,
+      "renderer": "canvas",
+      "status": "ok",
+      "waveEvaluation": "cpu",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.11150002320607504,
+        "p50": 0.10000038146972656,
+        "p95": 0.20000076293945312
+      },
+      "simulationMs": {
+        "mean": 0.05716669241587321,
+        "p50": 0,
+        "p95": 0.19999980926513672
+      },
+      "renderSubmitMs": {
+        "mean": 0.05433333079020182,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.665999999999997,
+        "p50": 16.69999999999709,
+        "p95": 16.700000000004366
+      },
+      "fps": 60.00240009600385,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 1,
+      "renderer": "canvas",
+      "status": "ok",
+      "waveEvaluation": "cpu",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.11866665204366048,
+        "p50": 0.10000038146972656,
+        "p95": 0.20000076293945312
+      },
+      "simulationMs": {
+        "mean": 0.06399999300638835,
+        "p50": 0.09999942779541016,
+        "p95": 0.19999980926513672
+      },
+      "renderSubmitMs": {
+        "mean": 0.054666659037272136,
+        "p50": 0.09999942779541016,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.665999999999997,
+        "p50": 16.69999999999709,
+        "p95": 16.700000000004366
+      },
+      "fps": 60.00240009600385,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 1,
+      "renderer": "webgl",
+      "status": "ok",
+      "waveEvaluation": "vertex-shader",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.04333337306976318,
+        "p50": 0,
+        "p95": 0.19999980926513672
+      },
+      "simulationMs": {
+        "mean": 0.01733334541320801,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "renderSubmitMs": {
+        "mean": 0.026000027656555177,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.66583333333333,
+        "p50": 16.69999999999709,
+        "p95": 16.700000000004366
+      },
+      "fps": 60.00300015000751,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 1,
+      "renderer": "webgl-cpu",
+      "status": "ok",
+      "waveEvaluation": "cpu",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.09800003528594971,
+        "p50": 0.10000038146972656,
+        "p95": 0.20000076293945312
+      },
+      "simulationMs": {
+        "mean": 0.05283334891001384,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "renderSubmitMs": {
+        "mean": 0.04516668637593587,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.66600000000001,
+        "p50": 16.69999999999709,
+        "p95": 16.70000000001164
+      },
+      "fps": 60.002400096003804,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 2,
+      "renderer": "webgl-cpu",
+      "status": "ok",
+      "waveEvaluation": "cpu",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.09350001017252604,
+        "p50": 0.10000038146972656,
+        "p95": 0.20000076293945312
+      },
+      "simulationMs": {
+        "mean": 0.05300003210703532,
+        "p50": 0,
+        "p95": 0.19999980926513672
+      },
+      "renderSubmitMs": {
+        "mean": 0.04049997806549072,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.721666666666668,
+        "p50": 16.69999999999709,
+        "p95": 16.70000000001164
+      },
+      "fps": 59.80265125087212,
+      "overBudgetFrames": 1
+    },
+    {
+      "trial": 2,
+      "renderer": "webgl",
+      "status": "ok",
+      "waveEvaluation": "vertex-shader",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.03166674296061198,
+        "p50": 0,
+        "p95": 0.19999980926513672
+      },
+      "simulationMs": {
+        "mean": 0.014833370844523111,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "renderSubmitMs": {
+        "mean": 0.016833372116088867,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.665999999999986,
+        "p50": 16.69999999999709,
+        "p95": 16.70000000001164
+      },
+      "fps": 60.00240009600389,
+      "overBudgetFrames": 0
+    },
+    {
+      "trial": 2,
+      "renderer": "canvas",
+      "status": "ok",
+      "waveEvaluation": "cpu",
+      "samples": 312,
+      "frames": 600,
+      "cpuMs": {
+        "mean": 0.10633334795633952,
+        "p50": 0.10000038146972656,
+        "p95": 0.20000076293945312
+      },
+      "simulationMs": {
+        "mean": 0.057666691144307454,
+        "p50": 0.09999942779541016,
+        "p95": 0.19999980926513672
+      },
+      "renderSubmitMs": {
+        "mean": 0.04866665681203206,
+        "p50": 0,
+        "p95": 0.10000038146972656
+      },
+      "frameIntervalMs": {
+        "mean": 16.665999999999986,
+        "p50": 16.69999999999709,
+        "p95": 16.79999999998836
+      },
+      "fps": 60.00240009600389,
+      "overBudgetFrames": 0
+    }
+  ],
+  "host": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "25.5.0",
+    "cpu": "Apple M2 Pro"
+  },
+  "environment": "Headless Chromium; mobile is viewport/touch emulation, not mobile hardware"
+}

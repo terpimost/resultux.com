@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+  <title>Wave renderer benchmark</title>
+  <style>
+    body {
+      font: 16px system-ui;
+      background: #17131a;
+      color: #e9e4e9;
+      margin: 24px;
+    }
+    canvas {
+      display: block;
+      max-width: 100%;
+    }
+    pre {
+      white-space: pre-wrap;
+    }
+    button,
+    select {
+      padding: 10px;
+      margin: 8px;
+    }
+  </style>
+  <h1>Wave renderer benchmark</h1>
+  <p>
+    Fixed seeded workload, 60 Hz simulation, 60 FPS cap. Keep this tab visible.
+    Compares Canvas, CPU-backed WebGL, and shader WebGL. Run on real desktop and
+    mobile hardware for device comparisons.
+  </p>
+  <label
+    >Workload
+    <select id="preset">
+      <option>desktop</option>
+      <option>mobile</option>
+    </select></label
+  ><button id="run">Run comparison</button
+  ><button id="download" disabled>Download JSON</button>
+  <div id="surface"></div>
+  <pre id="result">Ready</pre>
+  <script type="module">
+    import { runComparison } from "./benchmarks/benchmark.js";
+    let result;
+    document.querySelector("#run").onclick = async () => {
+      const button = document.querySelector("#run");
+      button.disabled = true;
+      document.querySelector("#result").textContent =
+        "Running three trials per render path…";
+      try {
+        result = await runComparison({
+          preset: document.querySelector("#preset").value,
+        });
+        document.querySelector("#result").textContent = JSON.stringify(
+          result,
+          null,
+          2,
+        );
+        document.querySelector("#download").disabled = false;
+      } catch (error) {
+        document.querySelector("#result").textContent = error.stack;
+      } finally {
+        button.disabled = false;
+      }
+    };
+    document.querySelector("#download").onclick = () => {
+      const url = URL.createObjectURL(
+        new Blob([JSON.stringify(result, null, 2)], {
+          type: "application/json",
+        }),
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `wave-${result.preset}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    };
+  </script>
+</html>
