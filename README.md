@@ -1,0 +1,1 @@
+# resultux.com
