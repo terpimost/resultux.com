@@ -48,21 +48,28 @@ export function attachPointerInteractions(stage, exit, P, simulation, enabled) {
   stage.addEventListener("pointerdown", (e) => {
     if (
       e.target === exit ||
-      e.target.closest?.(
-        "[data-wave-ignore], a, button, input, textarea, select, [contenteditable]",
-      ) ||
+      e.target.closest?.("[data-wave-ignore]") ||
+      (e.target.closest?.(
+        "a, button, input, textarea, select, [contenteditable]",
+      ) &&
+        !e.target.closest?.("[data-selectable]")) ||
       !enabled()
     )
       return;
-    document.getSelection()?.removeAllRanges();
-    e.preventDefault();
+    const selecting = Boolean(e.target.closest?.("[data-selectable]"));
+    // Observe text gestures without capturing the pointer or cancelling native
+    // selection, long press, or link activation.
+    if (!selecting) {
+      document.getSelection()?.removeAllRanges();
+      e.preventDefault();
+    }
     const q = pos(e);
     dragging = true;
     pointerId = e.pointerId;
     lastDrag = q;
     dragTravel = 0;
     dragVelocity = 0;
-    stage.setPointerCapture(e.pointerId);
+    if (!selecting) stage.setPointerCapture(e.pointerId);
     hover(true);
     launch(q.u, P.impact, direction(q), "impact");
   });
@@ -132,8 +139,8 @@ export function attachPointerInteractions(stage, exit, P, simulation, enabled) {
     armed = true;
     hover(e.pointerType !== "touch" && stage.matches(":hover"));
   }
-  stage.addEventListener("pointerup", finish);
-  stage.addEventListener("pointercancel", finish);
+  window.addEventListener("pointerup", finish);
+  window.addEventListener("pointercancel", finish);
   stage.addEventListener("lostpointercapture", (e) => {
     if (dragging && e.pointerId === pointerId) {
       dragging = false;
