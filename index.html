@@ -57,6 +57,8 @@
         margin: 0;
         overflow: hidden;
         overscroll-behavior: none;
+        /* Suppress double-tap zoom while keeping deliberate pinch zoom. */
+        touch-action: manipulation;
       }
       .scene {
         position: fixed;
@@ -67,6 +69,8 @@
         overflow: hidden;
         isolation: isolate;
         background: #1b1219;
+        touch-action: manipulation;
+        /* Keep single-finger scene drags available on supporting browsers. */
         touch-action: pinch-zoom;
       }
       .diagonal,
