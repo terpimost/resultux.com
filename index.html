@@ -205,19 +205,6 @@
 
         pointer-events: none;
       }
-      /* Temporary overlay outside the text's difference-blending layer. */
-      .services-shape-debug {
-        position: absolute;
-        top: 98px;
-        left: 24px;
-        width: 320px;
-        max-width: calc(100% - 48px);
-        height: 9.8em;
-        font-size: 16px;
-        background: rgb(255 0 0 / 30%);
-        clip-path: polygon(100% 0, 100% 100%, 35% 100%, 100% 28.5714%);
-        pointer-events: none;
-      }
       .statement {
         position: absolute;
         right: 24px;
@@ -312,8 +299,7 @@
           display: block;
           white-space: nowrap;
         }
-        .services::before,
-        .services-shape-debug {
+        .services::before {
           display: none;
         }
       }
@@ -341,8 +327,7 @@
           display: block;
           white-space: nowrap;
         }
-        .services::before,
-        .services-shape-debug {
+        .services::before {
           display: none;
         }
         .statement,
@@ -360,6 +345,45 @@
           left: 50%;
           right: auto;
           bottom: 20.8333333%; /* 150 / 720 */
+        }
+      }
+      @media (aspect-ratio > 1) and (width >= 980px) and (height > 600px) {
+        .services,
+        .statement,
+        .contact {
+          font-size: 20px;
+          line-height: 140%;
+        }
+        .brand-lockup {
+          left: 8.1666667%;
+          top: 6.6666667%;
+        }
+        .tagline {
+          left: calc(173px * var(--brand-scale, 1) + 2vw);
+          top: calc(32px * var(--brand-scale, 1) + 1.6666667vh);
+          top: calc(32px * var(--brand-scale, 1) + 1.6666667dvh);
+        }
+        .services {
+          left: auto;
+          right: 50%;
+          top: 24.1666667%;
+          width: 410px;
+        }
+        .contact {
+          right: 9.3333333%;
+          bottom: 7.7777778%;
+          text-align: right;
+        }
+        .statement {
+          left: 50%;
+          right: auto;
+          bottom: 20.8333333%;
+        }
+        .statement {
+          width: 180px;
+        }
+        .contact {
+          width: 9.6666667em; /* Preserve the original 174px / 18px proportions. */
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -420,7 +444,6 @@
           <span class="services-line">maintenance,</span>
           <span class="services-line">optimization.</span>
         </p>
-        <div class="services-shape-debug" aria-hidden="true"></div>
         <p class="statement" data-selectable>
           <span>Motivated by results,</span><br />
           <span>not temporary fame,</span><br />
