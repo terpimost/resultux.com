@@ -79,6 +79,10 @@ test("landing: CSS first, WebGL only, static fallback and mobile viewport fit", 
     );
     assert.equal(await page.locator("input,select,button").count(), 0);
     assert.ok(!imports.some((url) => url.endsWith("/renderers/canvas.js")));
+    assert.ok(
+      !imports.some((url) => new URL(url).pathname.endsWith(".js")),
+      "Landing JavaScript must be inline",
+    );
     assert.equal(
       await page.evaluate(() => window.pendingAnimationFrames.size),
       0,

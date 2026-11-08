@@ -3,7 +3,7 @@
 A dependency-free browser prototype with WebGL 1 and Canvas 2D rendering.
 
 Run `npm start` (or `python3 -m http.server 8000`) and open
-[the page](http://localhost:8000/). ES modules require HTTP.
+[the page](http://localhost:8000/). The diagnostic demo and benchmark use ES modules and require HTTP.
 The default [`index.html`](index.html) is a full-screen, non-scrollable page with
 no visible controls, using the supplied SVG wordmark and local Algorytm font. Its CSS diagonal paints immediately, before loading
 animation code. WebGL is initialized after a paint opportunity and shown only
@@ -37,6 +37,19 @@ impulses; offscreen/hidden animation sleeps; WebGL context loss selects Canvas.
   only when the sample count changes; waveform textures upload only for new waves.
 - `js/performance.js`: live CPU/FPS monitoring and benchmark summaries.
 - `js/app.js`: controls, sizing, renderer selection and animation lifecycle.
+
+## Inline landing-page build
+
+CSS and the SVG logo live directly in `index.html`. `npm run build` bundles and
+minifies the modular `js/landing.js` entry and its dependencies into the marked
+inline script in that page. The font remains an external WOFF2 asset. The landing
+page makes no JavaScript or stylesheet requests; WebGL still initializes after a
+paint opportunity, and the selection handler remains available without WebGL.
+
+Edit the HTML/CSS directly and the JavaScript in `js/`, then run `npm run build`.
+Do not edit the generated `data-wave-bundle` script. `npm start` and `npm test`
+regenerate it automatically. The build needs development dependencies (`npm ci`);
+serving the generated page needs no bundler or runtime dependencies.
 
 ## Verification
 

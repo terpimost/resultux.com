@@ -4,12 +4,15 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8000",
-    "test": "node --test",
+    "test": "npm run build && node --test",
     "benchmark": "node benchmarks/run.js",
-    "format": "prettier --write js benchmarks tests index.html resultux-wave.html benchmark.html README.md"
+    "format": "prettier --write js scripts benchmarks tests index.html resultux-wave.html benchmark.html README.md",
+    "build": "node scripts/inline-page.mjs",
+    "prestart": "npm run build"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",
+    "esbuild": "0.28.2",
     "prettier": "3.6.2"
   }
 }
