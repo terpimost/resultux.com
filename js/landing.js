@@ -209,3 +209,15 @@ function paintSelection() {
 document.addEventListener("selectionchange", paintSelection);
 window.addEventListener("resize", paintSelection);
 document.fonts.ready.then(paintSelection);
+
+// Start once the real font is ready; never reveal a fallback-font intro.
+document.fonts
+  .load('400 18px "Algorytm"')
+  .then(async (fonts) => {
+    if (!fonts.length) return;
+    await document.fonts.ready;
+    document.documentElement.classList.add("intro-ready");
+  })
+  .catch((error) =>
+    console.warn("Waiting for the brand font; keeping text hidden.", error),
+  );
