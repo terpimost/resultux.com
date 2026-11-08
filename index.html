@@ -290,6 +290,7 @@
         .services {
           left: 32px;
           top: 118px;
+          width: 240px;
           max-width: calc(100% - 64px);
           font-size: 18px;
           line-height: 140%;
@@ -314,6 +315,51 @@
         .services::before,
         .services-shape-debug {
           display: none;
+        }
+      }
+      /* Large portrait: viewport-relative positions from the 600 × 720 reference. */
+      @media (width > 600px) and (aspect-ratio < 1) {
+        .brand-lockup {
+          left: 8.1666667%; /* 49 / 600 */
+          top: 6.6666667%; /* 48 / 720 */
+        }
+        .tagline {
+          left: calc(173px * var(--brand-scale, 1) + 2vw);
+          top: calc(32px * var(--brand-scale, 1) + 1.6666667vh);
+          top: calc(32px * var(--brand-scale, 1) + 1.6666667dvh);
+        }
+        .services {
+          left: auto;
+          right: 50%;
+          top: 24.1666667%; /* 174 / 720 */
+          width: 240px;
+          max-width: none;
+          font-size: 18px;
+          line-height: 140%;
+        }
+        .services-line {
+          display: block;
+          white-space: nowrap;
+        }
+        .services::before,
+        .services-shape-debug {
+          display: none;
+        }
+        .statement,
+        .contact {
+          font-size: 18px;
+          line-height: 140%;
+          letter-spacing: 0.025ch;
+        }
+        .contact {
+          right: 9.3333333%; /* 56 / 600 */
+          bottom: 7.7777778%; /* 56 / 720 */
+          text-align: right;
+        }
+        .statement {
+          left: 50%;
+          right: auto;
+          bottom: 20.8333333%; /* 150 / 720 */
         }
       }
       @media (prefers-reduced-motion: reduce) {
