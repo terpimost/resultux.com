@@ -18,11 +18,14 @@ let ready = false,
   initializing = false,
   unavailable = false,
   raf = 0,
+  resumeRaf = 0,
   lastTime = 0,
   lastDraw = 0;
 const enabled = () => ready && !reduced.matches && !document.hidden;
 
 function stop() {
+  cancelAnimationFrame(resumeRaf);
+  resumeRaf = 0;
   cancelAnimationFrame(raf);
   raf = 0;
   lastTime = lastDraw = 0;
@@ -141,14 +144,35 @@ reduced.addEventListener("change", () => {
   } else if (ready) resize();
   else scheduleInitialization();
 });
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) stop();
-  else if (ready) {
-    draw();
+function suspend() {
+  stop();
+  // Keep the CSS diagonal visible if the browser discards the GPU surface.
+  canvas.classList.remove("is-ready");
+}
+function resume() {
+  if (document.hidden) return;
+  stop();
+  if (!ready) {
+    scheduleInitialization();
+    return;
+  }
+  resize();
+  // Safari can settle its viewport/compositor a frame after returning.
+  resumeRaf = requestAnimationFrame(() => {
+    resumeRaf = 0;
+    if (!enabled()) return;
+    resize();
     if (simulation.waves.length) wake();
-  } else scheduleInitialization();
+  });
+}
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) suspend();
+  else resume();
 });
+window.addEventListener("pagehide", suspend);
+window.addEventListener("pageshow", resume);
 window.addEventListener("resize", resize);
+window.visualViewport?.addEventListener("resize", resize);
 new ResizeObserver(resize).observe(scene);
 resize();
 scheduleInitialization();
@@ -158,7 +182,8 @@ scheduleInitialization();
 const selectionLayer = document.createElement("div");
 selectionLayer.className = "selection-layer";
 selectionLayer.setAttribute("aria-hidden", "true");
-document.querySelector("#content").prepend(selectionLayer);
+// Selection backgrounds must remain outside the blended content group.
+scene.insertBefore(selectionLayer, document.querySelector("#content"));
 function paintSelection() {
   const selection = document.getSelection();
   const boxes = document.createDocumentFragment();

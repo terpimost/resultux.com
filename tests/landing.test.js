@@ -88,6 +88,40 @@ test("landing: CSS first, WebGL only, static fallback and mobile viewport fit", 
       0,
       "Idle scene must sleep",
     );
+    await page.waitForFunction(() => {
+      const elements = document.querySelectorAll(
+        ".brand, .tagline, .services, .statement, .contact",
+      );
+      return [...elements].every((element) => {
+        const style = getComputedStyle(element);
+        return (
+          element.getAnimations().length === 0 &&
+          style.opacity === "1" &&
+          style.transform === "none" &&
+          style.mixBlendMode === "normal" &&
+          getComputedStyle(element.closest(".content")).mixBlendMode === "difference"
+        );
+      });
+    });
+    // Simulate a discarded/resized surface while the page is in the back cache.
+    await page.evaluate(() => {
+      dispatchEvent(new PageTransitionEvent("pagehide", { persisted: true }));
+      const canvas = document.querySelector("#wave");
+      if (canvas.classList.contains("is-ready"))
+        throw Error("Suspended canvas must expose the CSS fallback");
+      canvas.width = canvas.height = 1;
+      dispatchEvent(new PageTransitionEvent("pageshow", { persisted: true }));
+    });
+    await page.waitForFunction(() => {
+      const canvas = document.querySelector("#wave");
+      const bounds = document.querySelector("#scene").getBoundingClientRect();
+      return (
+        canvas.classList.contains("is-ready") &&
+        canvas.width === Math.round(bounds.width * 2) &&
+        canvas.height === Math.round(bounds.height * 2) &&
+        window.pendingAnimationFrames.size === 0
+      );
+    });
     const resting = await page.locator("#wave").screenshot();
     await page.touchscreen.tap(180, 450);
     await page.waitForTimeout(350);
@@ -178,15 +212,15 @@ test("landing: CSS first, WebGL only, static fallback and mobile viewport fit", 
     );
     assert.equal(
       await page
-        .locator(".tagline")
+        .locator(".content")
         .evaluate((e) => getComputedStyle(e).mixBlendMode),
       "difference",
     );
     assert.equal(
       await page
-        .locator(".brand")
+        .locator(".brand-lockup")
         .evaluate((e) => getComputedStyle(e).mixBlendMode),
-      "difference",
+      "normal",
     );
     await page.mouse.click(700, 300);
     await page.waitForFunction(
